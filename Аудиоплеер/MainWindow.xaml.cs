@@ -17,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static Microsoft.WindowsAPICodePack.Shell.PropertySystem.SystemProperties.System;
 
 
 namespace Аудиоплеер
@@ -31,6 +32,8 @@ namespace Аудиоплеер
             InitializeComponent();
 
             List<string> list = new List<string>();
+
+            
         }
         
         public void Papka_Click(object sender, RoutedEventArgs e)
@@ -51,6 +54,8 @@ namespace Аудиоплеер
                     }
                 }
             }
+            Media.Source = new Uri(list[0]);
+            Media.Play();
         }
 
         private void Media_MediaOpened(object sender, RoutedEventArgs e)
@@ -64,19 +69,30 @@ namespace Аудиоплеер
         }
 
         private void MusVbr_SelectionChanged(object sender, SelectionChangedEventArgs e)
-                {
-                    player = MusVbr.SelectedItem as MediaPlayer;
-                }
+        {
+            player = MusVbr.SelectedItem as MediaPlayer;
+        }
 
         private void PlayBtn_Click(object sender, RoutedEventArgs e)
         {
+            bool player = true;
 
-            //player.Open();
-            //player.Play();
-
+            if (player == true)
+            {
+                Media.Pause();
+                player = false;
+            }
+            else
+            {
+                Media.Play();
+                player = true;
+            }
+            
+           
         }
 
-        
+
+
     }
 }
 
